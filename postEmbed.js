@@ -46,15 +46,6 @@ module.exports.postEmbed = async (client) => {
 
 	await dbCmds.setMsgId("statsMsg", client.statsMsg.id);
 
-	let countHousesSold = await dbCmds.readSummValue("countHousesSold");
-	let countWarehousesSold = await dbCmds.readSummValue("countWarehousesSold");
-	let countPropertiesQuoted = await dbCmds.readSummValue("countPropertiesQuoted");
-	let countPropertiesRepod = await dbCmds.readSummValue("countPropertiesRepod");
-	let countTrainActivitiesChecked = await dbCmds.readSummValue("countTrainActivitiesChecked");
-	let countMiscSales = await dbCmds.readSummValue("countMiscSales");
-	let countFinancialAgreements = await dbCmds.readSummValue("countFinancialAgreements");
-	let activeFinancialAgreements = await dbCmds.readSummValue("activeFinancialAgreements");
-	let countFinancialPayments = await dbCmds.readSummValue("countFinancialPayments");
 
 	// theme color palette: https://coolors.co/palette/ffe169-fad643-edc531-dbb42c-c9a227-b69121-a47e1b-926c15-805b10-76520e
 

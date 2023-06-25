@@ -5,6 +5,11 @@ let reqString = {
 	required: true,
 };
 
+const reqNum = {
+	type: Number,
+	required: true,
+};
+
 let summarySchema = new Schema({
 	summaryName: reqString,
 	value: reqNum,
