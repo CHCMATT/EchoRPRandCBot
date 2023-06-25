@@ -33,7 +33,8 @@ module.exports.editEmbed = async (client) => {
 			projectsEmbed = new EmbedBuilder()
 				.setTitle(`R&C Development Projects`)
 				.setDescription(projectsDescList)
-				.setColor('D7F2F8');
+				.setColor('D7F2F8')
+				.setFooter({ 'text': '🟢 active\n🟡 in progress\n🔴 inactive' });
 		} else {
 			projectsEmbed = new EmbedBuilder()
 				.setTitle(`R&C Development Projects`)
