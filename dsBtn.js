@@ -1,7 +1,3 @@
-const dbCmds = require('./dbCmds.js');
-const editEmbed = require('./editEmbed.js');
-const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-
 module.exports.btnPressed = async (interaction) => {
 	try {
 		const buttonID = interaction.customId;

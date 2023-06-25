@@ -1,27 +1,3 @@
-const dbCmds = require('./dbCmds.js');
-const editEmbed = require('./editEmbed.js');
-
-const formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-	maximumFractionDigits: 0
-});
-
-function isValidUrl(string) {
-	let url;
-	try {
-		url = new URL(string);
-	} catch (_) {
-		return false;
-	}
-	return url.protocol === "http:" || url.protocol === "https:";
-}
-
-function strCleanup(str) {
-	var cleaned = str.replaceAll('`', '-').replaceAll('\\', '-');
-	return cleaned;
-};
-
 module.exports.modalSubmit = async (interaction) => {
 	try {
 		const modalID = interaction.customId;

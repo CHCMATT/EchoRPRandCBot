@@ -7,7 +7,7 @@ let reqString = {
 
 let projectsSchema = new Schema({
 	uniqueName: reqString,
-	cleanName: reqString,
+	displayName: reqString,
 	status: reqString,
 });
 

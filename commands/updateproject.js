@@ -1,6 +1,6 @@
 const dbCmds = require('../dbCmds.js');
 const editEmbed = require('../editEmbed.js');
-const { PermissionsBitField } = require('discord.js');
+const { PermissionsBitField, time } = require('discord.js');
 
 module.exports = {
 	name: 'updateproject',
@@ -33,7 +33,7 @@ module.exports = {
 			choices: [
 				{ name: 'Active', value: 'active' },
 				{ name: 'Inactive', value: 'inactive' },
-				{ name: 'In Development', value: 'inDevelopment' },
+				{ name: 'In Development', value: 'indevelopment' },
 			],
 			type: 3,
 			required: true,
@@ -41,47 +41,22 @@ module.exports = {
 	],
 	async execute(interaction) {
 		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-			const projectname = interaction.options.getString('projectname');
-			const newstatus = interaction.options.getString('newstatus');
+			const projectName = interaction.options.getString('projectname');
+			const newStatus = interaction.options.getString('newstatus');
 
-			if (counterName === "search") {
-				await dbCmds.addValue("countSearchWarrants", value);
-				var newValue = await dbCmds.readValue("countSearchWarrants");
-				var fixedName = "Search Warrants";
-			}
-			if (counterName === "subpoenas") {
-				await dbCmds.addValue("countSubpoenas", value);
-				var newValue = await dbCmds.readValue("countSubpoenas");
-				var fixedName = "Subpoenas";
-			}
-			if (counterName === "money") {
-				await dbCmds.addValue("countMoneySeized", value);
-				var newValue = formatter.format(await dbCmds.readValue("countMoneySeized"));
-				var fixedName = "Money Seized";
-			}
-			if (counterName === "guns") {
-				await dbCmds.addValue("countGunsSeized", value);
-				var newValue = await dbCmds.readValue("countGunsSeized");
-				var fixedName = "Guns Seized";
-			}
-			if (counterName === "drugs") {
-				await dbCmds.addValue("countDrugsSeized", value);
-				var newValue = await dbCmds.readValue("countDrugsSeized");
-				var fixedName = "Drugs Seized";
-			}
-			if (counterName === "calls") {
-				await dbCmds.addValue("countCallsAttended", value);
-				var newValue = await dbCmds.readValue("countCallsAttended");
-				var fixedName = "Calls Attended";
-			}
+			let displayName = await dbCmds.setProjStatus(projectName, newStatus)
+
 			await editEmbed.editEmbed(interaction.client);
-			await interaction.reply({ content: `Successfully added \`${value}\` to the \`${fixedName}\` counter - the new total is \`${newValue}\`.`, ephemeral: true });
 
-			await interaction.client.channels.cache.get(process.env.AUDIT_CHANNEL_ID).send(`:warning: \`${interaction.member.nickname}\` (\`${interaction.member.user.username}\`) added \`${value}\` to the \`${fixedName}\` counter for a new total of \`${newValue}\`.`)
+			let today = new Date();
+			let nowTime = time(today, 't');
+
+			await interaction.client.channels.cache.get(process.env.PROJECT_LOGS_CHANNEL_ID).send(`\`${interaction.member.nickname}\` modified the status of project \`${displayName}\` to \`${newStatus}\` at ${nowTime}.`);
+
+			await interaction.reply({ content: `✅ Successfully modified the status of project \`${displayName}\` to \`${newStatus}\`.`, ephemeral: true });
 		}
 		else {
-			await interaction.reply({ content: `:x: You must have the \`Full Time Detective\` role or the \`Administrator\` permission to use this function.`, ephemeral: true });
+			await interaction.reply({ content: `:x: You must have the \`Administrator\` permission to use this function.`, ephemeral: true });
 		}
 	},
 };
-
