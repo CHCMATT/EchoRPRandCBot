@@ -1,6 +1,6 @@
-const dbCmds = require('../dbCmds.js');
-const editEmbed = require('../editEmbed.js');
-const { PermissionsBitField, time } = require('discord.js');
+let dbCmds = require('../dbCmds.js');
+let editEmbed = require('../editEmbed.js');
+let { PermissionsBitField, time } = require('discord.js');
 
 module.exports = {
 	name: 'updateproject',
@@ -18,8 +18,6 @@ module.exports = {
 				{ name: 'Blackwoods Bot', value: 'blackwoodsBot' },
 				{ name: 'Empire Imports Bot', value: 'empireBot' },
 				{ name: 'Dynasty 8 Raffle Bot', value: 'd8RaffleBot' },
-				{ name: 'Benny\'s Raffle Bot', value: 'bennysRaffleBot' },
-				{ name: 'Bug Bot', value: 'bugBot' },
 				{ name: 'Dynasty 8 Website', value: 'd8Site' },
 				{ name: 'Los Santos Security Website', value: 'lssSite' },
 				{ name: 'Luxury Autos Website', value: 'laSite' },
@@ -41,8 +39,8 @@ module.exports = {
 	],
 	async execute(interaction) {
 		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-			const projectName = interaction.options.getString('projectname');
-			const newStatus = interaction.options.getString('newstatus');
+			let projectName = interaction.options.getString('projectname');
+			let newStatus = interaction.options.getString('newstatus');
 
 			let displayName = await dbCmds.setProjStatus(projectName, newStatus)
 

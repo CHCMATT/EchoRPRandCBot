@@ -1,6 +1,6 @@
 module.exports.btnPressed = async (interaction) => {
 	try {
-		const buttonID = interaction.customId;
+		let buttonID = interaction.customId;
 		switch (buttonID) {
 			case '':
 				break;

@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Posts the embed to the specified channel',
 	async execute(interaction) {
 		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-			const postOrEdit = await startup.startUp(interaction.client);
+			let postOrEdit = await startup.startUp(interaction.client);
 			await interaction.reply({ content: `Successfully ${postOrEdit} the embed to the <#${process.env.EMBED_CHANNEL_ID}> channel.`, ephemeral: true });
 		}
 		else {

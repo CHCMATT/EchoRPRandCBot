@@ -1,6 +1,6 @@
 module.exports.modalSubmit = async (interaction) => {
 	try {
-		const modalID = interaction.customId;
+		let modalID = interaction.customId;
 		switch (modalID) {
 			case '':
 				break;
@@ -16,5 +16,3 @@ module.exports.modalSubmit = async (interaction) => {
 		console.error(error);
 	}
 };
-
-

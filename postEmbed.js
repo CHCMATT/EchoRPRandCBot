@@ -1,3 +1,4 @@
+let moment = require('moment');
 let dbCmds = require('./dbCmds.js');
 let { EmbedBuilder } = require('discord.js');
 
@@ -7,24 +8,20 @@ module.exports.postEmbed = async (client) => {
 		let projectsDescList = '';
 
 		allProjects.sort((a, b) => {
-			let fa = a.displayName.toLowerCase(),
-				fb = b.displayName.toLowerCase();
-			if (fa < fb) { return -1; }
-			if (fa > fb) { return 1; }
-			return 0;
+			return a.orderedTime - b.orderedTime;
 		});
 
 		for (let i = 0; i < allProjects.length; i++) {
 			if (allProjects[i].status == 'active' || allProjects[i].status == 'indevelopment') {
 				if (allProjects[i].status == 'active') {
-					projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: 🟢`);
+					projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: 🟢\n`);
 				} else if (allProjects[i].status == 'indevelopment') {
-					projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: 🟡`);
+					projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: 🟡\n`);
 				}
 			} else if (allProjects[i].status == 'inactive') {
-				projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: ⚫`);
+				projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: 🔴\n`);
 			} else {
-				projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: ❓`);
+				projectsDescList = projectsDescList.concat(`**${allProjects[i].displayName}**: ❓\n`);
 			}
 		}
 

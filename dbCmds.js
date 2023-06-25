@@ -25,8 +25,8 @@ module.exports.setProjStatus = async (uName, newStatus) => {
 };
 
 // for creating and setting project statuses
-module.exports.createProj = async (uName, cName, newStatus) => {
-	await projects.findOneAndUpdate({ uniqueName: uName }, { uniqueName: uName, displayName: cName, status: newStatus }, { upsert: true });
+module.exports.createProj = async (uName, cName, newStatus, oTime) => {
+	await projects.findOneAndUpdate({ uniqueName: uName }, { uniqueName: uName, displayName: cName, status: newStatus, orderedTime: oTime }, { upsert: true });
 };
 
 module.exports.readProjStatus = async (uName) => {
@@ -40,6 +40,6 @@ module.exports.readProjStatus = async (uName) => {
 };
 
 module.exports.getAllProjects = async () => {
-	let result = await projects.find({ displayName: { $ne: null } }, { uniqueName: 1, displayName: 1, status: 1, _id: 0 });
+	let result = await projects.find({ displayName: { $ne: null } }, { uniqueName: 1, displayName: 1, status: 1, orderedTime: 1, _id: 0 });
 	return result;
 };

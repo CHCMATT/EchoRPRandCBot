@@ -5,7 +5,7 @@ let reqString = {
 	required: true,
 };
 
-const reqNum = {
+let reqNum = {
 	type: Number,
 	required: true,
 };

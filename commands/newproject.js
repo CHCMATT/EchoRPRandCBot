@@ -1,6 +1,6 @@
-const dbCmds = require('../dbCmds.js');
-const editEmbed = require('../editEmbed.js');
-const { PermissionsBitField, time } = require('discord.js');
+let dbCmds = require('../dbCmds.js');
+let editEmbed = require('../editEmbed.js');
+let { PermissionsBitField, time } = require('discord.js');
 
 module.exports = {
 	name: 'newproject',
@@ -29,14 +29,25 @@ module.exports = {
 			type: 3,
 			required: true,
 		},
+		{
+			name: 'orderedtime',
+			description: 'The unix timestamp of when it was ordered (if left blank, defaults to now)',
+			type: 4,
+			required: false,
+		},
 	],
 	async execute(interaction) {
 		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-			const uniqueName = interaction.options.getString('uniquename');
-			const diplayName = interaction.options.getString('diplayname');
-			const newStatus = interaction.options.getString('status');
+			let uniqueName = interaction.options.getString('uniquename');
+			let diplayName = interaction.options.getString('diplayname');
+			let newStatus = interaction.options.getString('status');
+			let orderedTime = interaction.options.getInteger('orderedtime');
 
-			await dbCmds.createProj(uniqueName, diplayName, newStatus);
+			if (orderedTime == null) {
+				orderedTime = Math.floor(new Date().getTime() / 1000.0)
+			}
+
+			await dbCmds.createProj(uniqueName, diplayName, newStatus, orderedTime);
 
 			await editEmbed.editEmbed(interaction.client);
 
@@ -45,7 +56,7 @@ module.exports = {
 
 			await interaction.client.channels.cache.get(process.env.PROJECT_LOGS_CHANNEL_ID).send(`\`${interaction.member.nickname}\` created a new project titled \`${diplayName}\` with status \`${newStatus}\` at ${nowTime}.`);
 
-			await interaction.reply({ content: `✅ Successfully created a new project titled \`${diplayName}\` with status \`${newStatus}\`.`, ephemeral: true });
+			await interaction.reply({ content: `✅ Successfully created a new project titled \`${diplayName}\` that started at ${time(orderedTime)} with status \`${newStatus}\`.`, ephemeral: true });
 		}
 		else {
 			await interaction.reply({ content: `:x: You must have the \`Administrator\` permission to use this function.`, ephemeral: true });
