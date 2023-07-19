@@ -1,20 +1,6 @@
 let dbCmds = require('../dbCmds.js');
 let editEmbed = require('../editEmbed.js');
 let { PermissionsBitField, time } = require('discord.js');
-
-async function buildChoices() {
-	let allProjects = await dbCmds.getAllProjects();
-	let choicesArray = [];
-
-	for (let i = 0; i < allProjects.length; i++) {
-		choicesArray.push({ name: allProjects[i].displayName, value: allProjects[i].uniqueName });
-	}
-
-	console.log(typeof choicesArray);
-	console.log(choicesArray);
-	return choicesArray;
-}
-
 var choices = buildChoices();
 
 module.exports = {
@@ -24,7 +10,19 @@ module.exports = {
 		{
 			name: 'projectname',
 			description: 'The name of the project',
-			choices: choices,
+			choices: [
+				{ name: 'CID Bot', value: 'cidBot' },
+				{ name: 'Dynasty 8 Bot', value: 'd8Bot' },
+				{ name: 'Luxury Autos Bot', value: 'laBot' },
+				{ name: 'Pegasus Airlines Bot', value: 'pegasusBot' },
+				{ name: 'UpTown Autos Bot', value: 'uptownBot' },
+				{ name: 'Blackwoods Bot', value: 'blackwoodsBot' },
+				{ name: 'Empire Imports Bot', value: 'empireBot' },
+				{ name: 'Dynasty 8 Raffle Bot', value: 'd8RaffleBot' },
+				{ name: 'Dynasty 8 Website', value: 'd8Site' },
+				{ name: 'Los Santos Security Website', value: 'lssSite' },
+				{ name: 'Luxury Autos Website', value: 'laSite' },
+			],
 			type: 3,
 			required: true,
 		},
