@@ -1,7 +1,6 @@
 let dbCmds = require('../dbCmds.js');
 let editEmbed = require('../editEmbed.js');
 let { PermissionsBitField, time } = require('discord.js');
-var choices = buildChoices();
 
 module.exports = {
 	name: 'updateproject',
