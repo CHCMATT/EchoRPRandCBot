@@ -16,7 +16,6 @@ module.exports.readMsgId = async (summaryName) => {
 	}
 };
 
-
 // for creating and setting project statuses
 module.exports.setProjStatus = async (uName, newStatus) => {
 	await projects.findOneAndUpdate({ uniqueName: uName }, { status: newStatus }, { upsert: true });
