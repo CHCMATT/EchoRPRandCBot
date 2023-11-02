@@ -21,6 +21,7 @@ module.exports = {
 				{ name: 'Dynasty 8 Website', value: 'd8Site' },
 				{ name: 'Los Santos Security Website', value: 'lssSite' },
 				{ name: 'Luxury Autos Website', value: 'laSite' },
+				{ name: 'LA Raffle Bot', value: 'laRaffleBot' },
 			],
 			type: 3,
 			required: true,
