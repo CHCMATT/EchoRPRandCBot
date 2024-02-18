@@ -22,6 +22,7 @@ module.exports = {
 				{ name: 'Los Santos Security Website', value: 'lssSite' },
 				{ name: 'Luxury Autos Website', value: 'laSite' },
 				{ name: 'LA Raffle Bot', value: 'laRaffleBot' },
+				{ name: 'Empire Imports Raffle Bot', value: 'empireRaffleBot' },
 			],
 			type: 3,
 			required: true,
